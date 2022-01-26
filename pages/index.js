@@ -7,6 +7,7 @@ import Head from 'next/head';
 //     * PAGES
 
 //     * COMPONENTS
+import Header from '../components/layout/Header';
 import Slider from '../components/slider/Slider';
 
 //     * STATE-MANAGEMENT (REDUX)
@@ -36,10 +37,7 @@ const Home = () => {
   //! --- RENDER ---
   return (
     <div>
-      <Head>
-        <title>Homepage</title>
-        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-      </Head>
+      <Header title='Homepage' />
       <Slider />
     </div>
   );
