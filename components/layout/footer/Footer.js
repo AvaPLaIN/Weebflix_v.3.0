@@ -1,13 +1,12 @@
 //! --- IMPORTS ---
 //     * NEXT-JS-MODULES
-import Head from 'next/head';
 
 //     * REACT-JS-MODULES
 
 //     * PAGES
 
 //     * COMPONENTS
-import Slider from '../components/slider/Slider';
+import { FooterContainer } from './Footer.styled';
 
 //     * STATE-MANAGEMENT (REDUX)
 
@@ -22,7 +21,7 @@ import Slider from '../components/slider/Slider';
 //     * LIBRARIES
 
 //! --- COMPONENT ---
-const Home = () => {
+const Footer = () => {
   //     * INIT
 
   //     * STATES
@@ -35,14 +34,10 @@ const Home = () => {
 
   //! --- RENDER ---
   return (
-    <div>
-      <Head>
-        <title>Homepage</title>
-        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-      </Head>
-      <Slider />
-    </div>
+    <FooterContainer>
+      <h1>Footer</h1>
+    </FooterContainer>
   );
 };
 
-export default Home;
+export default Footer;

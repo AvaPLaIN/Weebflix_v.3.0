@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: var(--color-dark-4);
 }
 
 html {
@@ -12,4 +13,74 @@ html {
 body {
   width: 100%;
   overflow-x: hidden;
+  background-color: var(--color-dark-1);
+}
+:root {
+  /*! --- RESPONSIVE --- */
+  --mobile-small: 320px;
+  --mobile-large: 480px;
+  --tablet-small: 600px;
+  --tablet-normal: 801px;
+  --tablet-large: 1025px;
+  --desktop: 1281px;
+
+  /*! --- COLORS --- */
+  --color-dark-1: #18191a;
+  --color-dark-2: #242526;
+  --color-dark-3: #3a3b3c;
+  --color-dark-4: #e4e6eb;
+  --color-dark-5: #b0b3b8;
+
+  /*! --- FONT-SIZES --- */
+  --font-size-h1: clamp(2rem, 1.4057rem + 1.8286vw, 3.6rem);
+  --font-size-h2: clamp(1.8rem, 1.2057rem + 1.8286vw, 3.4rem);
+  --font-size-h3: clamp(1.6rem, 1.0057rem + 1.8286vw, 3.2rem);
+  --font-size-h4: clamp(1.4rem, 0.8057rem + 1.8286vw, 3rem);
+  --font-size-h5: clamp(1.2rem, 0.6057rem + 1.8286vw, 2.8rem);
+  --font-size-h6: clamp(1rem, 0.4057rem + 1.8286vw, 2.6rem);
+  --font-size-p-big: clamp(1.4rem, 1.0286rem + 1.1429vw, 2.4rem);
+  --font-size-p-normal: clamp(1.2rem, 0.8286rem + 1.1429vw, 2.2rem);
+  --font-size-p-small: clamp(1rem, 0.6286rem + 1.1429vw, 2rem);
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+}
+
+h5 {
+  font-size: var(--font-size-h5);
+}
+
+h6 {
+  font-size: var(--font-size-h6);
+}
+
+p,
+a {
+  font-size: var(--font-size-p-normal);
+  text-decoration: none;
+}
+
+.font-size-big {
+  font-size: var(--font-size-p-big);
+}
+
+.font-size-normal {
+  font-size: var(--font-size-p-normal);
+}
+
+.font-size-small {
+  font-size: var(--font-size-p-small);
 }
