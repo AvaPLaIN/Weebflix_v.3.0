@@ -7,3 +7,15 @@ export const getPosts = async () => {
     return [];
   }
 };
+
+export const getPost = async (id) => {
+  try {
+    const data = await fetch(
+      `https://jsonplaceholder.typicode.com/posts/${id}`
+    );
+    const post = await data.json();
+    return post;
+  } catch (error) {
+    return {};
+  }
+};

@@ -7,13 +7,11 @@ import Head from 'next/head';
 //     * PAGES
 
 //     * COMPONENTS
-import Header from '../components/layout/Header';
-import Slider from '../components/slider/Slider';
 
 //     * STATE-MANAGEMENT (REDUX)
 
 //     * SERVICES (API)
-import { getPosts } from '../services/posts';
+import { getPosts, getPost } from '../../services/posts';
 
 //     * CUSTOM-HOOKS
 
@@ -24,7 +22,7 @@ import { getPosts } from '../services/posts';
 //     * LIBRARIES
 
 //! --- COMPONENT ---
-const Home = ({ posts }) => {
+const Post = ({ post }) => {
   //     * INIT
 
   //     * STATES
@@ -38,18 +36,29 @@ const Home = ({ posts }) => {
   //! --- RENDER ---
   return (
     <div>
-      <Header title='Homepage' />
-      {/* <Slider /> */}
+      <h1>{post.title}</h1>
     </div>
   );
 };
 
 //! --- GET_SERVER_SIDE_PROPS ---
-export async function getServerSideProps() {
-  const posts = await getPosts();
+export const getStaticProps = async (context) => {
+  const post = await getPost(context.params.id);
   return {
-    props: { posts },
+    props: { post },
   };
-}
+};
 
-export default Home;
+export const getStaticPaths = async () => {
+  const posts = await getPosts();
+
+  const postIds = posts.map((post) => post.id);
+  const paths = postIds.map((id) => ({ params: { id: id.toString() } }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export default Post;
