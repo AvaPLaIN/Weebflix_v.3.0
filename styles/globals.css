@@ -15,6 +15,7 @@ body {
   overflow-x: hidden;
   background-color: var(--color-dark-1);
 }
+
 :root {
   /*! --- RESPONSIVE --- */
   --mobile-small: 320px;

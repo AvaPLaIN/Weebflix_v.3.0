@@ -5,7 +5,7 @@ export const NavbarContainer = styled.header`
   height: 9rem;
   color: var(--color-dark-4);
   background-color: transparent;
-  top: 0;
-  position: fixed;
+  /* top: 0;
+  position: fixed; */
   z-index: 99;
 `;

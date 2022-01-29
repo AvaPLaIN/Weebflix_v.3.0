@@ -13,6 +13,7 @@ import Slider from '../components/slider/Slider';
 //     * STATE-MANAGEMENT (REDUX)
 
 //     * SERVICES (API)
+import { getPosts } from '../services/posts';
 
 //     * CUSTOM-HOOKS
 
@@ -23,7 +24,7 @@ import Slider from '../components/slider/Slider';
 //     * LIBRARIES
 
 //! --- COMPONENT ---
-const Home = () => {
+const Home = ({ posts }) => {
   //     * INIT
 
   //     * STATES
@@ -33,14 +34,23 @@ const Home = () => {
   //     * HANDLERS
 
   //     * EVENT-LISTENERS
+  console.log('posts: ', posts);
 
   //! --- RENDER ---
   return (
     <div>
       <Header title='Homepage' />
-      <Slider />
+      {/* <Slider /> */}
     </div>
   );
 };
+
+//! --- GET_SERVER_SIDE_PROPS ---
+export async function getServerSideProps() {
+  const posts = await getPosts();
+  return {
+    props: { posts },
+  };
+}
 
 export default Home;
