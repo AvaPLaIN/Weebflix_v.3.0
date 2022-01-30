@@ -14,7 +14,7 @@ import Slider from '../components/slider/Slider';
 //     * STATE-MANAGEMENT (REDUX)
 
 //     * SERVICES (API)
-import { getPosts } from '../services/posts';
+import { getPosts, getUsers } from '../services/posts';
 
 //     * CUSTOM-HOOKS
 
@@ -27,7 +27,7 @@ import { getPosts } from '../services/posts';
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 //! --- COMPONENT ---
-const Home = ({ posts }) => {
+const Home = ({ users }) => {
   //     * INIT
 
   //     * STATES
@@ -35,11 +35,11 @@ const Home = ({ posts }) => {
   //     * HOOKS
 
   //     * DATA-FETCHING
-  const {
-    data: users,
-    isLoading,
-    error,
-  } = useSWR('https://jsonplaceholder.typicode.com/users', fetcher);
+  // const {
+  //   data: users,
+  //   isLoading,
+  //   error,
+  // } = useSWR('https://jsonplaceholder.typicode.com/users', fetcher);
 
   //     * HANDLERS
 
@@ -54,20 +54,22 @@ const Home = ({ posts }) => {
           <h1 key={user.id}>{user.name}</h1>
         ))}
       </div>
-      <div className='post-container'>
+      {/* <div className='post-container'>
         {posts.map((post) => (
           <h1 key={post.id}>{post.title}</h1>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
 
 //! --- GET_SERVER_SIDE_PROPS ---
 export async function getStaticProps() {
-  const posts = await getPosts();
+  const users = await getUsers();
+
   return {
-    props: { posts },
+    props: { users },
+    // revalidate: 600,
   };
 }
 

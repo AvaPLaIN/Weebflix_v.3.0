@@ -19,3 +19,13 @@ export const getPost = async (id) => {
     return {};
   }
 };
+
+export const getUsers = async () => {
+  try {
+    const data = await fetch('http://localhost:8800/api/anime/getUsers');
+    const users = await data.json();
+    return users.data.users;
+  } catch (error) {
+    return [];
+  }
+};
