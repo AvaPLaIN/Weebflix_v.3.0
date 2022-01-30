@@ -1,6 +1,7 @@
 //! --- IMPORTS ---
 //     * NEXT-JS-MODULES
 import Head from 'next/head';
+import useSWR from 'swr';
 
 //     * REACT-JS-MODULES
 
@@ -23,6 +24,8 @@ import { getPosts } from '../services/posts';
 
 //     * LIBRARIES
 
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
 //! --- COMPONENT ---
 const Home = ({ posts }) => {
   //     * INIT
@@ -30,6 +33,13 @@ const Home = ({ posts }) => {
   //     * STATES
 
   //     * HOOKS
+
+  //     * DATA-FETCHING
+  const {
+    data: users,
+    isLoading,
+    error,
+  } = useSWR('https://jsonplaceholder.typicode.com/users', fetcher);
 
   //     * HANDLERS
 
@@ -39,13 +49,22 @@ const Home = ({ posts }) => {
   return (
     <div>
       <Header title='Homepage' />
-      {/* <Slider /> */}
+      <div className='user-container'>
+        {users?.map((user) => (
+          <h1 key={user.id}>{user.name}</h1>
+        ))}
+      </div>
+      <div className='post-container'>
+        {posts.map((post) => (
+          <h1 key={post.id}>{post.title}</h1>
+        ))}
+      </div>
     </div>
   );
 };
 
 //! --- GET_SERVER_SIDE_PROPS ---
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const posts = await getPosts();
   return {
     props: { posts },

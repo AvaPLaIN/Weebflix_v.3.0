@@ -85,3 +85,19 @@ a {
 .font-size-small {
   font-size: var(--font-size-p-small);
 }
+
+/* !TEST! */
+.post-container {
+  height: 300px;
+  width: 100%;
+  border: 1px solid red;
+  overflow-y: scroll;
+  margin-top: 2rem;
+}
+
+.user-container {
+  height: 300px;
+  width: 100%;
+  border: 1px solid green;
+  overflow-y: scroll;
+}
