@@ -50,7 +50,7 @@ const Home = ({ users }) => {
   return (
     <div>
       <Header title='Homepage' />
-      <Link href='post/1'>Post 1</Link>
+      <Link href='/about'>About</Link>
       <div className='user-container'>
         {users?.map((user) => (
           <h1 key={user.id}>{user.name}</h1>
