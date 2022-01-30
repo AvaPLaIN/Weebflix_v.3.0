@@ -66,7 +66,7 @@ const Home = ({ users }) => {
 };
 
 //! --- GET_SERVER_SIDE_PROPS ---
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const users = await getUsers();
 
   return {
