@@ -22,9 +22,11 @@ export const getPost = async (id) => {
 
 export const getUsers = async () => {
   try {
-    const data = await fetch('http://localhost:8800/api/anime/getUsers');
-    const users = await data.json();
-    return users.data.users;
+    const data = await fetch(
+      'https://angry-beaver-4ee432.netlify.app/users.json'
+    );
+    const { users } = await data.json();
+    return users;
   } catch (error) {
     return [];
   }

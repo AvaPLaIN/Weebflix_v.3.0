@@ -1,6 +1,7 @@
 //! --- IMPORTS ---
 //     * NEXT-JS-MODULES
 import Head from 'next/head';
+import Link from 'next/link';
 import useSWR from 'swr';
 
 //     * REACT-JS-MODULES
@@ -49,6 +50,7 @@ const Home = ({ users }) => {
   return (
     <div>
       <Header title='Homepage' />
+      <Link href='post/1'>Post 1</Link>
       <div className='user-container'>
         {users?.map((user) => (
           <h1 key={user.id}>{user.name}</h1>

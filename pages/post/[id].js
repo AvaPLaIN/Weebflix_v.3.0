@@ -1,6 +1,7 @@
 //! --- IMPORTS ---
 //     * NEXT-JS-MODULES
 import Head from 'next/head';
+import Link from 'next/Link';
 
 //     * REACT-JS-MODULES
 
@@ -36,6 +37,7 @@ const Post = ({ post }) => {
   //! --- RENDER ---
   return (
     <div>
+      <Link href='/'>Home</Link>
       <h1>{post.title}</h1>
     </div>
   );
