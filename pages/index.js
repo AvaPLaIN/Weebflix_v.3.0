@@ -1,21 +1,18 @@
 //! --- IMPORTS ---
 //     * NEXT-JS-MODULES
-import Head from 'next/head';
-import Link from 'next/link';
-import useSWR from 'swr';
 
 //     * REACT-JS-MODULES
+import { useState } from "react";
 
 //     * PAGES
 
 //     * COMPONENTS
-import Header from '../components/layout/Header';
-import Slider from '../components/slider/Slider';
+import Header from "../components/layout/Header";
 
 //     * STATE-MANAGEMENT (REDUX)
 
-//     * SERVICES (API)
-import { getPosts, getUsers } from '../services/posts';
+//     * APOLLO
+import { getAnimePageList } from "../apollo/anime/queries";
 
 //     * CUSTOM-HOOKS
 
@@ -25,53 +22,62 @@ import { getPosts, getUsers } from '../services/posts';
 
 //     * LIBRARIES
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
 //! --- COMPONENT ---
-const Home = ({ users }) => {
+const Home = ({ animes }) => {
   //     * INIT
 
   //     * STATES
+  const [page, setPage] = useState(1);
+  const [animeList, setAnimeList] = useState(animes);
 
   //     * HOOKS
 
   //     * DATA-FETCHING
-  // const {
-  //   data: users,
-  //   isLoading,
-  //   error,
-  // } = useSWR('https://jsonplaceholder.typicode.com/users', fetcher);
 
   //     * HANDLERS
+  const handleFetchMoreAnimesOnPagination = async () => {
+    const animeFetchConfig = {
+      page,
+      released: "2019",
+    };
+    const { data } = await getAnimePageList(animeFetchConfig);
+    setAnimeList([...animeList, ...data.animes]);
+    setPage((prev) => prev + 1);
+  };
 
   //     * EVENT-LISTENERS
 
   //! --- RENDER ---
   return (
     <div>
-      <Header title='Homepage' />
-      <Link href='/about'>About</Link>
-      <div className='user-container'>
-        {users?.map((user) => (
-          <h1 key={user.id}>{user.name}</h1>
+      <Header title="Homepage" />
+      {/* <Link href='/about'>About</Link> */}
+      <button onClick={handleFetchMoreAnimesOnPagination}>More</button>
+      <div className="animes">
+        {animeList?.map((anime) => (
+          <div key={anime._id}>
+            <p>
+              {anime?.title} - {anime?.released} - {anime?.status}
+            </p>
+          </div>
         ))}
       </div>
-      {/* <div className='post-container'>
-        {posts.map((post) => (
-          <h1 key={post.id}>{post.title}</h1>
-        ))}
-      </div> */}
     </div>
   );
 };
 
 //! --- GET_SERVER_SIDE_PROPS ---
-export async function getServerSideProps() {
-  const users = await getUsers();
+export async function getStaticProps() {
+  const animeFetchConfig = {
+    page: 0,
+    released: "2019",
+  };
+  const { data } = await getAnimePageList(animeFetchConfig);
 
   return {
-    props: { users },
-    revalidate: 30,
+    props: {
+      animes: data.animes,
+    },
   };
 }
 
