@@ -1,5 +1,7 @@
 //! --- IMPORTS ---
 //     * NEXT-JS-MODULES
+import dynamic from "next/dynamic";
+import Image from "next/image";
 
 //     * REACT-JS-MODULES
 import { useState } from "react";
@@ -19,8 +21,13 @@ import { getAnimePageList } from "../apollo/anime/queries";
 //     * UTILS/HELPERS
 
 //     * ASSETS
+import demonSlayerBanner from "../public/assets/demon-slayer-banner.jpeg";
+import onePunchMan from "../public/assets/onepunchman.jpeg";
+import slime from "../public/assets/slime.jpeg";
 
 //     * LIBRARIES
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
 
 //! --- COMPONENT ---
 const Home = ({ animes }) => {
@@ -31,6 +38,22 @@ const Home = ({ animes }) => {
   const [animeList, setAnimeList] = useState(animes);
 
   //     * HOOKS
+  const [refCallback, slider, sliderNode] = useKeenSlider({
+    loop: true,
+    mode: "free-snap",
+    breakpoints: {
+      "(min-width: 400px)": {
+        slides: { perView: 2, spacing: 5 },
+      },
+      "(min-width: 1000px)": {
+        slides: { perView: 3, spacing: 10 },
+      },
+    },
+    slides: {
+      perView: 1,
+      spacing: 15,
+    },
+  });
 
   //     * DATA-FETCHING
 
@@ -53,6 +76,42 @@ const Home = ({ animes }) => {
       <Header title="Homepage" />
       {/* <Link href='/about'>About</Link> */}
       <button onClick={handleFetchMoreAnimesOnPagination}>More</button>
+      <div ref={refCallback} className="keen-slider">
+        <div className="keen-slider__slide">
+          <Image
+            src={demonSlayerBanner}
+            alt="highlight image"
+            placeholder="blur"
+            priority
+            height={400}
+            layout="responsive"
+            objectFit="cover"
+            quality={50}
+          />
+        </div>
+        <div className="keen-slider__slide">
+          <Image
+            src={onePunchMan}
+            alt="highlight image"
+            placeholder="blur"
+            priority
+            layout="fill"
+            objectFit="cover"
+            quality={50}
+          />
+        </div>
+        <div className="keen-slider__slide">
+          <Image
+            src={slime}
+            alt="highlight image"
+            placeholder="blur"
+            priority
+            layout="fill"
+            objectFit="cover"
+            quality={50}
+          />
+        </div>
+      </div>
       <div className="animes">
         {animeList?.map((anime) => (
           <div key={anime._id}>
