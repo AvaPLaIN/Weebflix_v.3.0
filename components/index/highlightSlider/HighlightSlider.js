@@ -13,16 +13,13 @@ import { HighlightSliderContainer } from "./HighlightSlider.styled";
 //     * STATE-MANAGEMENT (REDUX)
 
 //     * APOLLO
-import { getAnimePageList } from "../../../../apollo/anime/queries";
 
 //     * CUSTOM-HOOKS
 
 //     * UTILS/HELPERS
 
 //     * ASSETS
-import demonSlayerBanner from "../../../../public/assets/demon-slayer-banner.jpeg";
-import onePunchMan from "../../../../public/assets/onepunchman.jpeg";
-import slime from "../../../../public/assets/slime.jpeg";
+import demonSlayerBanner from "../../../public/assets/onepunchman.jpeg";
 
 //     * LIBRARIES
 import { useKeenSlider } from "keen-slider/react";

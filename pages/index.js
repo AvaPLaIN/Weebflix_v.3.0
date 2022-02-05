@@ -8,7 +8,7 @@ import { useState } from "react";
 
 //     * COMPONENTS
 import Header from "../components/layout/Header";
-import HighlightSlider from "./index/components/highlightSlider/HighlightSlider";
+import HighlightSlider from "../components/index/highlightSlider/HighlightSlider";
 
 //     * STATE-MANAGEMENT (REDUX)
 
