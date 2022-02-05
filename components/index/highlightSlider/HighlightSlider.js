@@ -25,13 +25,7 @@ import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 
 //     * STATIC-CONFIG
-
-//! --- COMPONENT ---
-const HighlightSlider = ({ highlightAnimes }) => {
-  //     * INIT
-  const styles = ["bg-primary", "bg-blue"];
-  const newImageSrc = highlightAnimes[0].banner.toString().replace(/[()]/g, "");
-  const convertImage = (w, h) => `
+const convertImage = (w, h) => `
   <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
       <linearGradient id="g">
@@ -45,10 +39,14 @@ const HighlightSlider = ({ highlightAnimes }) => {
     <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
   </svg>`;
 
-  const toBase64 = (str) =>
-    typeof window === "undefined"
-      ? Buffer.from(str).toString("base64")
-      : window.btoa(str);
+const toBase64 = (str) =>
+  typeof window === "undefined"
+    ? Buffer.from(str).toString("base64")
+    : window.btoa(str);
+
+//! --- COMPONENT ---
+const HighlightSlider = ({ highlightAnimes }) => {
+  //     * INIT
 
   //     * STATES
   const [opacities, setOpacities] = useState([]);
@@ -126,7 +124,9 @@ const HighlightSlider = ({ highlightAnimes }) => {
               quality={60}
               className="hightlight-slider-image"
             />
-            <h1>{anime.title}</h1>
+            <div className="highlight-anime-details-container">
+              {/* <h1>{anime.title}</h1> */}
+            </div>
           </div>
         ))}
       </div>

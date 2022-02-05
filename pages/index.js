@@ -2,6 +2,7 @@
 //     * NEXT-JS-MODULES
 
 //     * REACT-JS-MODULES
+import { useState } from "react";
 
 //     * PAGES
 
@@ -25,27 +26,38 @@ import { getAnimePageList } from "../apollo/anime/queries";
 //     * STATIC-CONFIG
 
 //! --- COMPONENT ---
-const Home = ({ highlightAnimes }) => {
+const Home = ({ animes, highlightAnimes }) => {
   //     * INIT
 
   //     * STATES
-  // const [page, setPage] = useState(1);
-  // const [animeList, setAnimeList] = useState(animes);
+  const [page, setPage] = useState(1);
+  const [animeList, setAnimeList] = useState(animes);
 
   //     * HOOKS
 
   //     * DATA-FETCHING
 
   //     * HANDLERS
-  // const handleFetchMoreAnimesOnPagination = async () => {
-  //   const animeFetchConfig = {
-  //     page,
-  //     released: "2019",
-  //   };
-  //   const { data } = await getAnimePageList(animeFetchConfig);
-  //   setAnimeList([...animeList, ...data.animes]);
-  //   setPage((prev) => prev + 1);
-  // };
+  const handleFetchMoreAnimesOnPagination = async () => {
+    const animeFetchConfig = {
+      page,
+      status: "Ongoing",
+      released: "2020",
+    };
+    const animeFetchQuerySelectors = `
+      _id
+      banner
+      title
+      released
+      status
+    `;
+    const { data } = await getAnimePageList(
+      animeFetchConfig,
+      animeFetchQuerySelectors
+    );
+    setAnimeList([...animeList, ...data.animes]);
+    setPage((prev) => prev + 1);
+  };
 
   //     * EVENT-LISTENERS
 
@@ -54,7 +66,7 @@ const Home = ({ highlightAnimes }) => {
     <div>
       <Header title="Homepage" />
       <HighlightSlider highlightAnimes={highlightAnimes} />
-      {/* <button onClick={handleFetchMoreAnimesOnPagination}>More</button>
+      <button onClick={handleFetchMoreAnimesOnPagination}>More</button>
       <div className="animes">
         {animeList?.map((anime) => (
           <div key={anime._id}>
@@ -63,7 +75,7 @@ const Home = ({ highlightAnimes }) => {
             </p>
           </div>
         ))}
-      </div> */}
+      </div>
     </div>
   );
 };
@@ -72,12 +84,15 @@ const Home = ({ highlightAnimes }) => {
 export async function getStaticProps() {
   const animeFetchConfig = {
     page: 0,
-    released: "2019",
+    status: "Ongoing",
+    released: "2020",
   };
   const animeFetchQuerySelectors = `
     _id
     banner
     title
+    released
+    status
   `;
   const { data } = await getAnimePageList(
     animeFetchConfig,
@@ -87,6 +102,7 @@ export async function getStaticProps() {
   return {
     props: {
       highlightAnimes: data.animes,
+      animes: data.animes,
     },
   };
 }
