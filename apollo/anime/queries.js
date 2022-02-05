@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import client from "../config";
 
-export const getAnimePageList = async (filterOptions) => {
+export const getAnimePageList = async (filterOptions, querySelectors) => {
   let queryFilterOptions = ``;
 
   for (const [key, value] of Object.entries(filterOptions)) {
@@ -24,12 +24,7 @@ export const getAnimePageList = async (filterOptions) => {
     query: gql`
       query Animes {
         animes(${queryFilterOptions}) {
-          _id
-          title
-          genres
-          released
-          status
-          banner
+          ${querySelectors}
         }
       }
     `,

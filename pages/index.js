@@ -25,7 +25,7 @@ import { getAnimePageList } from "../apollo/anime/queries";
 //     * STATIC-CONFIG
 
 //! --- COMPONENT ---
-const Home = ({ animes, highlightAnimes }) => {
+const Home = ({ highlightAnimes }) => {
   //     * INIT
 
   //     * STATES
@@ -74,11 +74,18 @@ export async function getStaticProps() {
     page: 0,
     released: "2019",
   };
-  const { data } = await getAnimePageList(animeFetchConfig);
+  const animeFetchQuerySelectors = `
+    _id
+    banner
+    title
+  `;
+  const { data } = await getAnimePageList(
+    animeFetchConfig,
+    animeFetchQuerySelectors
+  );
 
   return {
     props: {
-      animes: data.animes,
       highlightAnimes: data.animes,
     },
   };
