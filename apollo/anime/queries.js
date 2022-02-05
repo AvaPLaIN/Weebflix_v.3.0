@@ -29,6 +29,7 @@ export const getAnimePageList = async (filterOptions) => {
           genres
           released
           status
+          banner
         }
       }
     `,
