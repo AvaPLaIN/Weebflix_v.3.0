@@ -13,6 +13,7 @@ import {
   NavbarContainer,
   NavigationContainer,
 } from "./Navbar.styled";
+import Search from "./search/Search";
 
 //     * STATE-MANAGEMENT (REDUX)
 
@@ -56,6 +57,7 @@ const Navbar = () => {
   }, [searchInputValue]);
 
   //     * HANDLERS
+  const handleCloseSearchSection = () => setSearchInputIsOpen(false);
 
   //     * EVENT-LISTENERS
 
@@ -126,6 +128,12 @@ const Navbar = () => {
           </div>
         </div>
       </ControlsContainer>
+      {searchInputValue && searchInputIsOpen && (
+        <Search
+          searchValue={searchInputValue}
+          handleCloseSearchSection={handleCloseSearchSection}
+        />
+      )}
     </NavbarContainer>
   );
 };

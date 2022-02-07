@@ -6,8 +6,9 @@
 //     * PAGES
 
 //     * COMPONENTS
-import Navbar from '../components/layout/navbar/Navbar';
-import Footer from '../components/layout/footer/Footer';
+import Header from "../components/layout/Header";
+import Navbar from "../components/layout/navbar/Navbar";
+import Footer from "../components/layout/footer/Footer";
 
 //     * STATE-MANAGEMENT (REDUX)
 
@@ -18,7 +19,7 @@ import Footer from '../components/layout/footer/Footer';
 //     * UTILS/HELPERS
 
 //     * ASSETS
-import '../styles/globals.css';
+import "../styles/globals.css";
 
 //     * LIBRARIES
 
@@ -37,6 +38,7 @@ function MyApp({ Component, pageProps }) {
   //! --- RENDER ---
   return (
     <>
+      <Header title="Weebflix" />
       <Navbar />
       <Component {...pageProps} />
       <Footer />

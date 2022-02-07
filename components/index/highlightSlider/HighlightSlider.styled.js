@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const HighlightSliderContainer = styled.div`
   height: 80vh;
+  position: relative;
 
   .keen-slider {
     height: 100%;
@@ -23,5 +24,21 @@ export const HighlightSliderContainer = styled.div`
       position: absolute;
       z-index: -1;
     }
+  }
+
+  .progress-bar-container {
+    z-index: 999;
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    left: -100%;
+    bottom: 0;
+    background-color: var(--color-dark-4);
+    ${(props) =>
+      !props.mouseOver &&
+      props.triggerNewProgressBarAnimation &&
+      `animation: loadSliderProgress ${
+        props.time / 1000
+      }s infinite ease-in-out;`}
   }
 `;

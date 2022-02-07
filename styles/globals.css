@@ -8,6 +8,7 @@
 html {
   font-size: 62.5%;
   scroll-behavior: smooth;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -44,6 +45,16 @@ body {
   --font-size-p-big: clamp(1.4rem, 1.0286rem + 1.1429vw, 2.4rem);
   --font-size-p-normal: clamp(1.2rem, 0.8286rem + 1.1429vw, 2.2rem);
   --font-size-p-small: clamp(1rem, 0.6286rem + 1.1429vw, 2rem);
+}
+
+/*! --- ANIMATIONS --- !*/
+@keyframes loadSliderProgress {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(100%);
+  }
 }
 
 h1 {

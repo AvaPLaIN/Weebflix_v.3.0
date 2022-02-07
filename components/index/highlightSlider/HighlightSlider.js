@@ -24,6 +24,9 @@ import { HighlightSliderContainer } from "./HighlightSlider.styled";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 
+//     * CONSTANTS
+const CHANGE_SLIDER_TIME = 4000;
+
 //     * STATIC-CONFIG
 const convertImage = (w, h) => `
   <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -50,6 +53,9 @@ const HighlightSlider = ({ highlightAnimes }) => {
 
   //     * STATES
   const [opacities, setOpacities] = useState([]);
+  const [mouseOver, setMouseOver] = useState(false);
+  const [triggerNewProgressBarAnimation, setTriggerNewProgressBarAnimation] =
+    useState(true);
 
   //     * HOOKS
   const [sliderRef] = useKeenSlider(
@@ -66,7 +72,7 @@ const HighlightSlider = ({ highlightAnimes }) => {
     [
       (slider) => {
         let timeout;
-        let mouseOver = false;
+        setMouseOver(false);
         function clearNextTimeout() {
           clearTimeout(timeout);
         }
@@ -75,21 +81,27 @@ const HighlightSlider = ({ highlightAnimes }) => {
           if (mouseOver) return;
           timeout = setTimeout(() => {
             slider.next();
-          }, 4000);
+          }, CHANGE_SLIDER_TIME);
         }
         slider.on("created", () => {
           slider.container.addEventListener("mouseover", () => {
-            mouseOver = true;
+            setMouseOver(true);
             clearNextTimeout();
           });
           slider.container.addEventListener("mouseout", () => {
-            mouseOver = false;
+            setMouseOver(false);
             nextTimeout();
           });
           nextTimeout();
         });
         slider.on("dragStarted", clearNextTimeout);
-        slider.on("animationEnded", nextTimeout);
+        slider.on("animationStarted", () => {
+          setTriggerNewProgressBarAnimation(false);
+        });
+        slider.on("animationEnded", () => {
+          nextTimeout();
+          setTriggerNewProgressBarAnimation(true);
+        });
         slider.on("updated", nextTimeout);
       },
     ]
@@ -103,7 +115,12 @@ const HighlightSlider = ({ highlightAnimes }) => {
 
   //! --- RENDER ---
   return (
-    <HighlightSliderContainer>
+    <HighlightSliderContainer
+      mouseOver={mouseOver}
+      time={CHANGE_SLIDER_TIME}
+      triggerNewProgressBarAnimation={triggerNewProgressBarAnimation}
+    >
+      <div className="progress-bar-container"></div>
       <div ref={sliderRef} className="keen-slider">
         {highlightAnimes.map((anime, index) => (
           <div
