@@ -6,12 +6,13 @@ import styled from "styled-components";
 
 //* STYLED COMPONENTS
 export const SearchContainer = styled.div`
+  z-index: 1000;
   position: absolute;
   top: 7rem;
   left: 0;
   height: calc(100vh - 7rem);
   width: 100%;
-  background-color: rgba(var(--background-color-dark-1), 1);
+  background-color: var(--color-dark-1);
   display: flex;
   align-items: center;
   justify-content: center;

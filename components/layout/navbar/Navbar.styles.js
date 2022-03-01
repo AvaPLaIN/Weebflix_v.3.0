@@ -1,29 +1,16 @@
 import styled, { css } from "styled-components";
 
-//* EVENT COMPONENTS
-const windowIsScrolled = css`
-  background-color: var(--color-dark-1);
-  box-shadow: 0px -2px 21px 4px var(--color-dark-3);
-`;
-
-//* LOGIC COMPONENTS
-const getWindowIsScroller = (props) => {
-  if (props.windowIsScrolled) return windowIsScrolled;
-};
-
 //* STYLED COMPONENTS
 export const NavbarContainer = styled.nav`
   z-index: 999;
-  position: fixed;
-  top: 0;
   width: 100%;
   height: 7rem;
   transition: all 0.2s ease-in;
-  color: var(--color-dark-4);
-  ${getWindowIsScroller}
+  color: var(--color-dark);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: var(--color-dark);
 `;
 
 export const NavigationContainer = styled.nav`
@@ -33,25 +20,25 @@ export const NavigationContainer = styled.nav`
   padding: 0 3rem;
 
   a {
-    font-size: var(--font-size-p-small);
-    color: var(--color-dark-5);
+    color: var(--color-white);
     font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1rem 2rem;
     border-radius: 1rem;
+    font-size: 1.3rem;
 
     &:nth-child(2) {
       margin-left: 3rem;
     }
 
     &:hover {
-      color: var(--color-dark-4);
+      color: var(--color-orange);
     }
 
     &.active {
-      color: var(--color-dark-4);
+      color: var(--color-orange);
     }
   }
 
@@ -90,7 +77,7 @@ export const ControlsContainer = styled.div`
     display: flex;
     align-items: center;
     gap: ${(props) => (props.searchInputIsOpen ? "2rem" : "0rem")};
-    background-color: var(--color-dark-1);
+    background-color: var(--color-dark);
     height: 38px;
     padding: 0 1rem;
     border-radius: 1rem;
@@ -98,29 +85,29 @@ export const ControlsContainer = styled.div`
     .icon {
       cursor: pointer;
       font-size: 1.8rem;
-      color: red;
+      color: var(--color-grey);
     }
 
     input {
       height: 100%;
       border: none;
       outline: none;
-      color: var(--color-dark-5);
-      background-color: var(--color-dark-1);
+      color: var(--color-white);
+      background-color: var(--color-dark);
       width: ${(props) => (props.searchInputIsOpen ? "200px" : "0px")};
       transition: all 0.3s ease-in-out;
 
       &::placeholder {
-        color: var(--color-dark-3);
+        color: var(--color-grey);
         opacity: 1;
       }
 
       &:-ms-input-placeholder {
-        color: var(--color-dark-3);
+        color: var(--color-grey);
       }
 
       &::-ms-input-placeholder {
-        color: var(--color-dark-3);
+        color: var(--color-grey);
       }
     }
   }
@@ -130,7 +117,7 @@ export const ControlsContainer = styled.div`
 
     .icon {
       font-size: 2.4rem;
-      color: var(--color-dark-4);
+      color: var(--color-grey);
       cursor: pointer;
     }
 
@@ -141,7 +128,7 @@ export const ControlsContainer = styled.div`
       left: ${(props) => (props.navbarIsOpen ? "0%" : "100%")};
       height: 100vh;
       width: 100%;
-      background-color: var(--color-dark-1);
+      background-color: var(--color-dark);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -181,9 +168,10 @@ export const ControlsContainer = styled.div`
     .avatar {
       height: 40px;
       width: 40px;
-      border-radius: 50%;
+      border-radius: 30%;
       overflow: hidden;
-      background-color: var(--color-dark-1);
+      background-color: var(--color-grey);
+      color: var(--color-dark);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -194,13 +182,14 @@ export const ControlsContainer = styled.div`
     }
 
     .account-settings {
+      z-index: 3;
       position: absolute;
       display: none;
       flex-direction: column;
       align-items: center;
       gap: 1.5rem;
       padding: 2rem;
-      background-color: var(--color-dark-1);
+      background-color: var(--color-orange);
       right: 0;
       border-radius: 1rem;
       border-top-right-radius: 0;
@@ -215,6 +204,7 @@ export const ControlsContainer = styled.div`
       .avatar {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
+        background-color: var(--color-orange);
       }
 
       .account-settings {

@@ -22,6 +22,7 @@ import Footer from "../components/layout/footer/Footer";
 import "../styles/globals.css";
 
 //     * LIBRARIES
+import { StyledEngineProvider } from "@mui/material/styles";
 
 //! --- COMPONENT ---
 function MyApp({ Component, pageProps }) {
@@ -38,10 +39,12 @@ function MyApp({ Component, pageProps }) {
   //! --- RENDER ---
   return (
     <>
-      <Header title="Weebflix" />
-      <Navbar />
-      <Component {...pageProps} />
-      <Footer />
+      <StyledEngineProvider injectFirst>
+        <Header title="Weebflix" />
+        <Navbar />
+        <Component {...pageProps} />
+        <Footer />
+      </StyledEngineProvider>
     </>
   );
 }

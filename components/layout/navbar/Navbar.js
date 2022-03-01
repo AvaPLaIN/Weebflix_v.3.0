@@ -12,8 +12,9 @@ import {
   ControlsContainer,
   NavbarContainer,
   NavigationContainer,
-} from "./Navbar.styled";
+} from "./Navbar.styles";
 import Search from "./search/Search";
+import NavLink from "../../widgets/NavLink/";
 
 //     * STATE-MANAGEMENT (REDUX)
 
@@ -49,12 +50,12 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    if (searchInputValue) {
-      document.body.style.overflow = "hidden";
+    if (searchInputIsOpen) {
+      document.body.style.overflowY = "hidden";
     } else {
-      document.body.style.overflow = "scroll";
+      document.body.style.overflowY = "auto";
     }
-  }, [searchInputValue]);
+  }, [searchInputIsOpen]);
 
   //     * HANDLERS
   const handleCloseSearchSection = () => setSearchInputIsOpen(false);
@@ -65,12 +66,12 @@ const Navbar = () => {
   return (
     <NavbarContainer windowIsScrolled={windowIsScrolled}>
       <NavigationContainer>
-        <Link href="/">
-          <a>Home</a>
-        </Link>
-        <Link href="/mylist">
-          <a>My List</a>
-        </Link>
+        <NavLink href="/" exact>
+          Home
+        </NavLink>
+        <NavLink href="/mylist" exact>
+          My List
+        </NavLink>
       </NavigationContainer>
       <ControlsContainer
         searchInputIsOpen={searchInputIsOpen}
@@ -128,7 +129,7 @@ const Navbar = () => {
           </div>
         </div>
       </ControlsContainer>
-      {searchInputValue && searchInputIsOpen && (
+      {searchInputIsOpen && (
         <Search
           searchValue={searchInputValue}
           handleCloseSearchSection={handleCloseSearchSection}

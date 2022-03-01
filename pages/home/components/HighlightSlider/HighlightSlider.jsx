@@ -1,54 +1,36 @@
-//! --- IMPORTS ---
-//     * NEXT-JS-MODULES
-import Image from "next/image";
+// !--- IMPORTS ---!
+//     * NEXT-JS MODULES
 
-//     * REACT-JS-MODULES
+//     * REACT-JS MODULES
 import { useState } from "react";
 
-//     * PAGES
+//     * STYLE-COMPONENTS
+import { HighlightSliderContainer } from "./HighlightSlider.styles";
 
 //     * COMPONENTS
-import { HighlightSliderContainer } from "./HighlightSlider.styled";
+import Image from "../../../../components/widgets/Image";
 
-//     * STATE-MANAGEMENT (REDUX)
+//     * STATES
 
-//     * APOLLO
+//     * HOOKS
 
-//     * CUSTOM-HOOKS
+//     * SERVICES (GRAPHQL, APOLLO, ...)
 
-//     * UTILS/HELPERS
-
-//     * ASSETS
-
-//     * LIBRARIES
+//     * NPM-PACKAGES
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 
-//     * CONSTANTS
-const CHANGE_SLIDER_TIME = 4000;
+//     * UTILS
+
+//     * REACT-ICONS
+
+//     * ASSETS
 
 //     * STATIC-CONFIG
-const convertImage = (w, h) => `
-  <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <defs>
-      <linearGradient id="g">
-        <stop stop-color="#333" offset="20%" />
-        <stop stop-color="#222" offset="50%" />
-        <stop stop-color="#333" offset="70%" />
-      </linearGradient>
-    </defs>
-    <rect width="${w}" height="${h}" fill="#333" />
-    <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
-    <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
-  </svg>`;
-
-const toBase64 = (str) =>
-  typeof window === "undefined"
-    ? Buffer.from(str).toString("base64")
-    : window.btoa(str);
+const CHANGE_SLIDER_TIME = 4000;
 
 //! --- COMPONENT ---
-const HighlightSlider = ({ highlightAnimes }) => {
+const HighlightSlider = ({ highlightAnimes, dataTestId }) => {
   //     * INIT
 
   //     * STATES
@@ -119,6 +101,7 @@ const HighlightSlider = ({ highlightAnimes }) => {
       mouseOver={mouseOver}
       time={CHANGE_SLIDER_TIME}
       triggerNewProgressBarAnimation={triggerNewProgressBarAnimation}
+      dataTestId={dataTestId}
     >
       <div className="progress-bar-container"></div>
       <div ref={sliderRef} className="keen-slider">
@@ -130,19 +113,27 @@ const HighlightSlider = ({ highlightAnimes }) => {
           >
             <Image
               src={`/api/imageProxy?url=${encodeURIComponent(anime.banner)}`}
-              alt="highlight image"
-              placeholder="blur"
-              blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                convertImage(700, 475)
-              )}`}
+              alt="highlight anime image"
               priority
-              layout="fill"
-              objectFit="cover"
-              quality={60}
+              quality={80}
               className="hightlight-slider-image"
             />
             <div className="highlight-anime-details-container">
-              {/* <h1>{anime.title}</h1> */}
+              <p className="genres">
+                {anime?.genres?.slice(-3).map((genre, index) => (
+                  <span key={index}>{genre}</span>
+                ))}
+              </p>
+              <h1 className="title">
+                <span className="title-group">{anime.groupName}</span>
+                <br />
+                {anime?.titleEng?.replace(anime.groupName, "")}
+              </h1>
+              <p className="description">{anime?.description}</p>
+              <div className="control-buttons">
+                <button>Play</button>
+                <button>Read More</button>
+              </div>
             </div>
           </div>
         ))}
