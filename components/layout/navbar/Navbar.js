@@ -30,6 +30,7 @@ import NavLink from "../../widgets/NavLink/";
 
 //     * ICONS
 import { FaTimes, FaSearch, FaBars } from "react-icons/fa";
+import Image from "../../widgets/Image";
 
 //! --- COMPONENT ---
 const Navbar = () => {
@@ -97,7 +98,15 @@ const Navbar = () => {
         </div>
 
         <div className="account-container">
-          <div className="avatar">A</div>
+          <div className="avatar">
+            <Image
+              src={`/api/imageProxy?url=${encodeURIComponent(
+                "https://static.crunchyroll.com/assets/avatar/170x170/0001-cr-white-orange.png"
+              )}`}
+              alt="Avatar"
+              className="avatar-image"
+            />
+          </div>
           <div className="account-settings">
             <p>AvaPLaIN</p>
             <p>Logout</p>

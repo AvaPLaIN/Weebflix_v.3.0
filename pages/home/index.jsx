@@ -6,9 +6,14 @@ import { useState } from "react";
 
 //     * PAGES
 
+//     * STYLE-COMPONENTS
+// import { FeedContainer } from "../../styles/Home.styles";
+
 //     * COMPONENTS
 import Header from "../../components/layout/Header";
-import HighlightSlider from "./components/HighlightSlider/";
+import HighlightSlider from "../../components/pages/home/HighlightSlider/";
+// import AiringFeed from "./components/AiringFeed/";
+// import ListFeed from "./components/ListFeed/";
 
 //     * STATE-MANAGEMENT (REDUX)
 
@@ -65,6 +70,10 @@ const Home = ({ airingAnimes }) => {
     <div>
       <Header title="Homepage" />
       <HighlightSlider highlightAnimes={airingAnimes} />
+      {/* <FeedContainer>
+        <AiringFeed />
+        <ListFeed />
+      </FeedContainer> */}
     </div>
   );
 };

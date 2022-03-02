@@ -8,7 +8,7 @@ import { useState } from "react";
 import { HighlightSliderContainer } from "./HighlightSlider.styles";
 
 //     * COMPONENTS
-import Image from "../../../../components/widgets/Image";
+import HighlightItem from "./components/HighlightItem/";
 
 //     * STATES
 
@@ -106,36 +106,7 @@ const HighlightSlider = ({ highlightAnimes, dataTestId }) => {
       <div className="progress-bar-container"></div>
       <div ref={sliderRef} className="keen-slider">
         {highlightAnimes.map((anime, index) => (
-          <div
-            key={index}
-            className="highlight-slide-container"
-            style={{ opacity: opacities[index] }}
-          >
-            <Image
-              src={`/api/imageProxy?url=${encodeURIComponent(anime.banner)}`}
-              alt="highlight anime image"
-              priority
-              quality={80}
-              className="hightlight-slider-image"
-            />
-            <div className="highlight-anime-details-container">
-              <p className="genres">
-                {anime?.genres?.slice(-3).map((genre, index) => (
-                  <span key={index}>{genre}</span>
-                ))}
-              </p>
-              <h1 className="title">
-                <span className="title-group">{anime.groupName}</span>
-                <br />
-                {anime?.titleEng?.replace(anime.groupName, "")}
-              </h1>
-              <p className="description">{anime?.description}</p>
-              <div className="control-buttons">
-                <button>Play</button>
-                <button>Read More</button>
-              </div>
-            </div>
-          </div>
+          <HighlightItem anime={anime} key={index} opacity={opacities[index]} />
         ))}
       </div>
     </HighlightSliderContainer>

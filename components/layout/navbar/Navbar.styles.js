@@ -168,10 +168,9 @@ export const ControlsContainer = styled.div`
     .avatar {
       height: 40px;
       width: 40px;
-      border-radius: 30%;
       overflow: hidden;
+      border-radius: 50%;
       background-color: var(--color-grey);
-      color: var(--color-dark);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -179,9 +178,15 @@ export const ControlsContainer = styled.div`
       font-weight: 900;
       transition: all 0.2s ease-in-out;
       cursor: default;
+
+      .avatar-image {
+        border-radius: 50%;
+      }
     }
 
     .account-settings {
+      border-top: 1px solid var(--color-orange);
+      color: var(--color-white);
       z-index: 3;
       position: absolute;
       display: none;
@@ -189,7 +194,7 @@ export const ControlsContainer = styled.div`
       align-items: center;
       gap: 1.5rem;
       padding: 2rem;
-      background-color: var(--color-orange);
+      background-color: var(--color-dark);
       right: 0;
       border-radius: 1rem;
       border-top-right-radius: 0;

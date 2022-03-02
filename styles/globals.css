@@ -21,10 +21,10 @@ body {
 
 :root {
   /*! --- COLORS --- */
-  --color-dark: #222220;
+  --color-dark: #23252b;
   --color-grey: #575653;
   --color-white: #e8e8e8;
-  --color-orange: #ff9900;
+  --color-orange: #f47521;
 }
 
 /*! --- ANIMATIONS --- !*/
