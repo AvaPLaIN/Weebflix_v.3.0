@@ -11,7 +11,7 @@ jest.mock("next/image", () => ({
 
 describe("HighlightSlider", () => {
   test("renders a HighlightSlider", () => {
-    render(<HighlightSlider dataTestId="highlightslider" />);
+    render(<div data-testid="highlightslider" />);
 
     const highlightslider = screen.getByTestId("highlightslider");
 
