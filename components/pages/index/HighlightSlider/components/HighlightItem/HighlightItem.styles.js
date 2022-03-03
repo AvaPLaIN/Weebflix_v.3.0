@@ -28,6 +28,10 @@ export const HighlightItemContainer = styled.div`
     position: relative;
     padding: 4rem 2rem;
 
+    @media (max-width: 900px) {
+      max-width: 70%;
+    }
+
     &::before {
       content: "";
       position: absolute;
@@ -50,6 +54,7 @@ export const HighlightItemContainer = styled.div`
       font-size: 1.1rem;
       border-radius: 0.5rem;
       font-weight: 800;
+      white-space: nowrap;
     }
 
     .title {
@@ -85,6 +90,7 @@ export const HighlightItemContainer = styled.div`
         font-weight: 800;
         cursor: pointer;
         transition: all 0.2s ease-in;
+        white-space: nowrap;
 
         &:nth-child(2) {
           background-color: var(--color-orange);

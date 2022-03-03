@@ -5,10 +5,13 @@
 import { useState } from "react";
 
 //     * STYLE-COMPONENTS
+import { FeedContainer } from "../styles/Home.styles";
 
 //     * COMPONENTS
 import Header from "../components/layout/Header";
 import HighlightSlider from "../components/pages/index/HighlightSlider/";
+import AiringFeed from "../components/pages/index/AiringFeed/";
+import ListFeed from "../components/pages/index/ListFeed/";
 
 //     * STATES
 
@@ -67,6 +70,10 @@ const Index = ({ airingAnimes }) => {
     <div>
       <Header title="Homepage" />
       <HighlightSlider highlightAnimes={airingAnimes} />
+      <FeedContainer>
+        <AiringFeed airingAnimes={airingAnimes} />
+        <ListFeed />
+      </FeedContainer>
     </div>
   );
 };
@@ -75,7 +82,7 @@ const Index = ({ airingAnimes }) => {
 export async function getStaticProps() {
   const animeFetchConfig = {
     page: 0,
-    status: "ongoing",
+    // status: "ongoing",
   };
   const animeFetchQuerySelectors = `
     _id
@@ -84,6 +91,7 @@ export async function getStaticProps() {
     groupName
     description
     banner
+    thumnail
   `;
   const { data } = await getAnimePageList(
     animeFetchConfig,
