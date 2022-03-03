@@ -30,10 +30,14 @@ export const HighlightItemContainer = styled.div`
 
     @media (max-width: 900px) {
       max-width: 70%;
+      margin-left: 3rem;
+      padding: 2rem 1rem;
     }
 
     @media (max-width: 600px) {
       max-width: 90%;
+      margin-left: 1rem;
+      padding: 1rem 0.5rem;
     }
 
     &::before {
