@@ -32,6 +32,10 @@ export const HighlightItemContainer = styled.div`
       max-width: 70%;
     }
 
+    @media (max-width: 600px) {
+      max-width: 90%;
+    }
+
     &::before {
       content: "";
       position: absolute;
