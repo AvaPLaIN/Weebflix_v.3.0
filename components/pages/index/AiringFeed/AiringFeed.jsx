@@ -40,7 +40,7 @@ const AiringFeed = ({ airingAnimes }) => {
     // rtl: true,
     breakpoints: {
       "(min-width: 190px)": {
-        slides: { perView: 1, spacing: 10 },
+        slides: { perView: 2, spacing: 10 },
       },
       "(min-width: 400px)": {
         slides: { perView: 2, spacing: 10 },
