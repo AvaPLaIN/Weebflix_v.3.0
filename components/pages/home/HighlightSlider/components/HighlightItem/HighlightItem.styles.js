@@ -8,8 +8,6 @@ export const HighlightItemContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  opacity: ${({ opacity }) => opacity};
-  z-index: ${({ opacity }) => opacity};
 
   .hightlight-slider-image {
     background-color: transparent;

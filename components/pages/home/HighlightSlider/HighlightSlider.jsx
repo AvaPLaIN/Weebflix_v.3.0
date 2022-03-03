@@ -106,7 +106,12 @@ const HighlightSlider = ({ highlightAnimes, dataTestId }) => {
       <div className="progress-bar-container"></div>
       <div ref={sliderRef} className="keen-slider">
         {highlightAnimes.map((anime, index) => (
-          <HighlightItem anime={anime} key={index} opacity={opacities[index]} />
+          <div
+            key={index}
+            style={{ opacity: opacities[index], zIndex: opacities[index] }}
+          >
+            <HighlightItem anime={anime} key={index} />
+          </div>
         ))}
       </div>
     </HighlightSliderContainer>

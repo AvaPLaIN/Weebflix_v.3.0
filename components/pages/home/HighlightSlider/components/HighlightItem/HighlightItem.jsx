@@ -2,7 +2,7 @@
 //     * NEXT-JS MODULES
 
 //     * REACT-JS MODULES
-import React from "react";
+import React, { useEffect, memo } from "react";
 
 //     * STYLE-COMPONENTS
 import { HighlightItemContainer } from "./HighlightItem.styles";
@@ -27,7 +27,8 @@ import Image from "../../../../../../components/widgets/Image/";
 //     * STATIC-CONFIG
 
 // !--- COMPONENT ---!
-const HighlightItem = ({ anime, opacity }) => {
+// eslint-disable-next-line react/display-name
+const HighlightItem = memo(({ anime }) => {
   //     * INIT
 
   //     * STATES
@@ -42,7 +43,7 @@ const HighlightItem = ({ anime, opacity }) => {
 
   // !--- RENDER ---!
   return (
-    <HighlightItemContainer opacity={opacity}>
+    <HighlightItemContainer>
       <Image
         src={`/api/imageProxy?url=${encodeURIComponent(anime.banner)}`}
         alt="highlight anime image"
@@ -69,6 +70,6 @@ const HighlightItem = ({ anime, opacity }) => {
       </div>
     </HighlightItemContainer>
   );
-};
+});
 
 export default HighlightItem;
