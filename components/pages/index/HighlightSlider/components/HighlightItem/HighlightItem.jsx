@@ -48,7 +48,7 @@ const HighlightItem = memo(({ anime }) => {
         src={`/api/imageProxy?url=${encodeURIComponent(anime.banner)}`}
         alt="highlight anime image"
         priority
-        quality={40}
+        quality={80}
         className="hightlight-slider-image"
       />
       <div className="highlight-anime-details-container">

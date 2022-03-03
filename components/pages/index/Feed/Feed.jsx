@@ -5,10 +5,10 @@
 import React from "react";
 
 //     * STYLE-COMPONENTS
-import { AiringFeedContainer } from "./AiringFeed.styles";
+import { FeedContainer } from "./Feed.styles";
 
 //     * COMPONENTS
-import Card from "../../../modules/Card/";
+import Card from "../../../modules/Card";
 
 //     * STATES
 
@@ -29,7 +29,7 @@ import "keen-slider/keen-slider.min.css";
 //     * STATIC-CONFIG
 
 // !--- COMPONENT ---!
-const AiringFeed = ({ airingAnimes }) => {
+const AiringFeed = ({ title, animes }) => {
   //     * INIT
 
   //     * STATES
@@ -83,15 +83,15 @@ const AiringFeed = ({ airingAnimes }) => {
 
   // !--- RENDER ---!
   return (
-    <AiringFeedContainer>
-      <h1 className="header">Simulcast Season</h1>
+    <FeedContainer>
+      <h1 className="header">{title}</h1>
       <div className="line"></div>
       <div ref={sliderRef} className="keen-slider">
-        {airingAnimes?.map((anime) => (
+        {animes?.map((anime) => (
           <Card key={anime._id} anime={anime} />
         ))}
       </div>
-    </AiringFeedContainer>
+    </FeedContainer>
   );
 };
 

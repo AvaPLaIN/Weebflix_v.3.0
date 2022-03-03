@@ -10,8 +10,7 @@ import { FeedContainer } from "../styles/Home.styles";
 //     * COMPONENTS
 import Header from "../components/layout/Header";
 import HighlightSlider from "../components/pages/index/HighlightSlider/";
-import AiringFeed from "../components/pages/index/AiringFeed/";
-import ListFeed from "../components/pages/index/ListFeed/";
+import Feed from "../components/pages/index/Feed/";
 
 //     * STATES
 
@@ -19,6 +18,11 @@ import ListFeed from "../components/pages/index/ListFeed/";
 
 //     * SERVICES (GRAPHQL, APOLLO, ...)
 import { getAnimePageList } from "../apollo/anime/queries";
+import {
+  airingAnimeConfig,
+  shounenAnimeConfig,
+  movieAnimeConfig,
+} from "../apollo/queryConfig";
 
 //     * NPM-PACKAGES
 
@@ -31,7 +35,7 @@ import { getAnimePageList } from "../apollo/anime/queries";
 //     * STATIC-CONFIG
 
 //! --- COMPONENT ---
-const Index = ({ airingAnimes }) => {
+const Index = ({ airingAnimes, shounenAnimes, movieAnimes }) => {
   //     * INIT
 
   //     * STATES
@@ -70,37 +74,24 @@ const Index = ({ airingAnimes }) => {
     <div>
       <Header title="Homepage" />
       <HighlightSlider highlightAnimes={airingAnimes} />
-      <FeedContainer>
-        <AiringFeed airingAnimes={airingAnimes} />
-        <ListFeed />
-      </FeedContainer>
+      <Feed title="Simulcast Season" animes={airingAnimes} />
+      <Feed title="Movies" animes={movieAnimes} />
+      <Feed title="Shounen" animes={shounenAnimes} />
     </div>
   );
 };
 
 // //! --- GET_SERVER_SIDE_PROPS ---
 export async function getStaticProps() {
-  const animeFetchConfig = {
-    page: 0,
-    // status: "ongoing",
-  };
-  const animeFetchQuerySelectors = `
-    _id
-    genres
-    titleEng
-    groupName
-    description
-    banner
-    thumnail
-  `;
-  const { data } = await getAnimePageList(
-    animeFetchConfig,
-    animeFetchQuerySelectors
-  );
+  const { data: airing } = await getAnimePageList(airingAnimeConfig);
+  const { data: movie } = await getAnimePageList(movieAnimeConfig);
+  const { data: shounen } = await getAnimePageList(shounenAnimeConfig);
 
   return {
     props: {
-      airingAnimes: data.animes,
+      airingAnimes: airing.animes,
+      shounenAnimes: shounen.animes,
+      movieAnimes: movie.animes,
     },
   };
 }
