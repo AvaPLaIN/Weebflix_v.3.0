@@ -32,6 +32,7 @@ const CHANGE_SLIDER_TIME = 4000;
 //! --- COMPONENT ---
 const HighlightSlider = ({ highlightAnimes, dataTestId }) => {
   //     * INIT
+  let timeout; //? timeout for slider to change item - clear when unmounting component
 
   //     * STATES
   const [opacities, setOpacities] = useState([]);
@@ -40,7 +41,6 @@ const HighlightSlider = ({ highlightAnimes, dataTestId }) => {
     useState(true);
 
   //     * REFS
-  const isMounted = useRef(false);
 
   //     * HOOKS
   const [sliderRef] = useKeenSlider(
@@ -56,7 +56,6 @@ const HighlightSlider = ({ highlightAnimes, dataTestId }) => {
     },
     [
       (slider) => {
-        let timeout;
         setMouseOver(false);
         function clearNextTimeout() {
           clearTimeout(timeout);
@@ -65,7 +64,7 @@ const HighlightSlider = ({ highlightAnimes, dataTestId }) => {
           clearTimeout(timeout);
           if (mouseOver) return;
           timeout = setTimeout(() => {
-            if (isMounted.current) return slider.next();
+            slider.next();
           }, CHANGE_SLIDER_TIME);
         }
         slider.on("created", () => {
@@ -84,10 +83,8 @@ const HighlightSlider = ({ highlightAnimes, dataTestId }) => {
           setTriggerNewProgressBarAnimation(false);
         });
         slider.on("animationEnded", () => {
-          if (isMounted.current) {
-            nextTimeout();
-            setTriggerNewProgressBarAnimation(true);
-          }
+          nextTimeout();
+          setTriggerNewProgressBarAnimation(true);
         });
         slider.on("updated", nextTimeout);
       },
@@ -95,11 +92,10 @@ const HighlightSlider = ({ highlightAnimes, dataTestId }) => {
   );
 
   useEffect(() => {
-    isMounted.current = true;
     return () => {
-      isMounted.current = false;
+      clearTimeout(timeout);
     };
-  }, []);
+  }, [timeout]);
 
   //     * DATA-FETCHING
 
