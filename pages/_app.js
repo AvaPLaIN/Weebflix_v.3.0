@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }) {
         <Header title="Weebflix" />
         <Navbar />
         <Component {...pageProps} />
-        <Footer />
+        {/* <Footer /> */}
       </StyledEngineProvider>
     </>
   );

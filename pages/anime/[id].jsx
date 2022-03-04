@@ -7,6 +7,7 @@
 
 //     * COMPONENTS
 import Header from "../../components/layout/Header";
+import AnimeHeader from "../../components/pages/anime/Header/";
 
 //     * STATES
 
@@ -47,11 +48,20 @@ const AnimeId = ({ anime, groupAnimes }) => {
   //! --- RENDER ---
   return (
     <div>
-      <Header title="Homepage" />
-      <h1>Anime: {anime?.titleEng}</h1>
-      {groupAnimes?.map((anime) => (
+      <Header title={`Weebflix - ${anime.titleEng}`} />
+      <AnimeHeader
+        banner={anime.banner}
+        thumnail={anime.thumnail}
+        titleEng={anime.titleEng}
+        titleJap={anime.titleJap}
+        genres={anime.genres}
+        released={anime.released}
+        type={anime.type}
+        groupName={anime.groupName}
+      />
+      {/* {groupAnimes?.map((anime) => (
         <h1 key={anime?._id}>{anime.titleEng}</h1>
-      ))}
+      ))} */}
     </div>
   );
 };
@@ -84,7 +94,7 @@ export async function getStaticProps({ params }) {
       anime: JSON.stringify(anime),
       groupAnimes: JSON.stringify(groupAnimes),
     },
-    revalidate: 100,
+    revalidate: 86400,
   };
 }
 
