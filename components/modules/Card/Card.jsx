@@ -1,5 +1,6 @@
 // !--- IMPORTS ---!
 //     * NEXT-JS MODULES
+import Link from "next/link";
 
 //     * REACT-JS MODULES
 
@@ -42,14 +43,18 @@ const Card = ({ anime }) => {
   // !--- RENDER ---!
   return (
     <CardContainer className="keen-slider__slide">
-      <div className="airing-slider-image">
-        <Image
-          src={`/api/imageProxy?url=${encodeURIComponent(anime?.thumnail)}`}
-          alt="airing anime image"
-          quality={60}
-        />
-      </div>
-      <p className="title">{anime?.titleEng}</p>
+      <Link href={{ pathname: `/anime/${anime._id}` }}>
+        <a className="link">
+          <div className="airing-slider-image">
+            <Image
+              src={`/api/imageProxy?url=${encodeURIComponent(anime?.thumnail)}`}
+              alt="airing anime image"
+              quality={60}
+            />
+          </div>
+          <p className="title">{anime?.titleEng}</p>
+        </a>
+      </Link>
     </CardContainer>
   );
 };
