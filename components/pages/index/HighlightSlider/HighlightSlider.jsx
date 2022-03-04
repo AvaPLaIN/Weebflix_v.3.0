@@ -48,6 +48,7 @@ const HighlightSlider = ({ highlightAnimes, dataTestId }) => {
         const new_opacities = s.track.details.slides.map(
           (slide) => slide.portion
         );
+        console.log("change: ", new_opacities)
         setOpacities(new_opacities);
       },
     },
