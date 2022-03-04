@@ -2,7 +2,7 @@
 //     * NEXT-JS MODULES
 
 //     * REACT-JS MODULES
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 //     * STYLE-COMPONENTS
 import { HighlightSliderContainer } from "./HighlightSlider.styles";
@@ -39,6 +39,9 @@ const HighlightSlider = ({ highlightAnimes, dataTestId }) => {
   const [triggerNewProgressBarAnimation, setTriggerNewProgressBarAnimation] =
     useState(true);
 
+  //     * REFS
+  const isMounted = useRef(false);
+
   //     * HOOKS
   const [sliderRef] = useKeenSlider(
     {
@@ -62,7 +65,7 @@ const HighlightSlider = ({ highlightAnimes, dataTestId }) => {
           clearTimeout(timeout);
           if (mouseOver) return;
           timeout = setTimeout(() => {
-            slider.next();
+            if (isMounted.current) return slider.next();
           }, CHANGE_SLIDER_TIME);
         }
         slider.on("created", () => {
@@ -81,13 +84,22 @@ const HighlightSlider = ({ highlightAnimes, dataTestId }) => {
           setTriggerNewProgressBarAnimation(false);
         });
         slider.on("animationEnded", () => {
-          nextTimeout();
-          setTriggerNewProgressBarAnimation(true);
+          if (isMounted.current) {
+            nextTimeout();
+            setTriggerNewProgressBarAnimation(true);
+          }
         });
         slider.on("updated", nextTimeout);
       },
     ]
   );
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   //     * DATA-FETCHING
 
