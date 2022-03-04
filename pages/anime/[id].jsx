@@ -29,9 +29,10 @@ import Anime from "../../models/Anime";
 //     * STATIC-CONFIG
 
 //! --- COMPONENT ---
-const AnimeId = ({ anime }) => {
+const AnimeId = ({ anime, groupAnimes }) => {
   //     * INIT
   anime = JSON.parse(anime);
+  groupAnimes = JSON.parse(groupAnimes);
 
   //     * STATES
 
@@ -48,6 +49,9 @@ const AnimeId = ({ anime }) => {
     <div>
       <Header title="Homepage" />
       <h1>Anime: {anime?.titleEng}</h1>
+      {groupAnimes?.map((anime) => (
+        <h1 key={anime?._id}>{anime.titleEng}</h1>
+      ))}
     </div>
   );
 };
@@ -72,11 +76,14 @@ export async function getStaticPaths() {
 //! --- GET_SERVER_SIDE_PROPS ---
 export async function getStaticProps({ params }) {
   await dbConnect();
-  // console.log("new anime");
   const anime = await Anime.findOne({ _id: params.id });
+  const groupAnimes = await Anime.find({ groupName: anime.groupName });
 
   return {
-    props: { anime: JSON.stringify(anime) },
+    props: {
+      anime: JSON.stringify(anime),
+      groupAnimes: JSON.stringify(groupAnimes),
+    },
     revalidate: 100,
   };
 }
