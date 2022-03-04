@@ -65,13 +65,14 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 }
 
 //! --- GET_SERVER_SIDE_PROPS ---
 export async function getStaticProps({ params }) {
   await dbConnect();
+  // console.log("new anime");
   const anime = await Anime.findOne({ _id: params.id });
 
   return {
