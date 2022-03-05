@@ -58,6 +58,8 @@ const AnimeId = ({ anime, groupAnimes }) => {
         released={anime.released}
         type={anime.type}
         groupName={anime.groupName}
+        episodesCount={anime.episodesCount}
+        status={anime.status}
       />
       {/* {groupAnimes?.map((anime) => (
         <h1 key={anime?._id}>{anime.titleEng}</h1>

@@ -26,7 +26,18 @@ import Image from "../../../widgets/Image/";
 //     * STATIC-CONFIG
 
 // !--- COMPONENT ---!
-const Header = ({ banner, thumnail, titleEng }) => {
+const Header = ({
+  banner,
+  thumnail,
+  genres,
+  titleEng,
+  groupName,
+  episodesCount,
+  status,
+  type,
+  released,
+  titleJap,
+}) => {
   //     * INIT
 
   //     * STATES
@@ -60,9 +71,26 @@ const Header = ({ banner, thumnail, titleEng }) => {
             quality={60}
             className="hightlight-slider-image"
           />
+          <div className="type">{type}</div>
+          <div className="status">{status}</div>
         </div>
         <div className="info-container">
-          <h1 className="title">{titleEng}</h1>
+          <h1 className="title">
+            <span className="title-group">{groupName}</span>
+            {titleEng?.replace(groupName, "")}
+          </h1>
+          <p className="genres">
+            {genres?.map((genre, index) => (
+              <span key={index}>{genre}</span>
+            ))}
+          </p>
+          <div className="info">
+            <div className="titleJap">{titleJap}</div>
+            <div className="released">Released: {released}</div>
+            {type !== "movie" && (
+              <p className="episodes-count">Episodes: {episodesCount}</p>
+            )}
+          </div>
         </div>
       </div>
     </HeaderContainer>

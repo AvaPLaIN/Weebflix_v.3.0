@@ -3,18 +3,11 @@
 import Link from "next/link";
 
 //     * REACT-JS-MODULES
-import { useEffect, useState } from "react";
 
 //     * PAGES
 
 //     * COMPONENTS
-import {
-  ControlsContainer,
-  NavbarContainer,
-  NavigationContainer,
-} from "./Navbar.styles";
-import Search from "./search/Search";
-import NavLink from "../../widgets/NavLink/";
+import { NavbarContainer } from "./Navbar.styles";
 
 //     * STATE-MANAGEMENT (REDUX)
 
@@ -39,29 +32,10 @@ const Navbar = () => {
   //     * INIT
 
   //     * STATES
-  const [windowIsScrolled, setWindowIsScrolled] = useState(false);
-  const [navbarIsOpen, setNavbarIsOpen] = useState(false);
-  const [searchInputIsOpen, setSearchInputIsOpen] = useState(false);
-  const [searchInputValue, setSearchInputValue] = useState("");
 
   //     * HOOKS
-  useEffect(() => {
-    window.onscroll = () => {
-      setWindowIsScrolled(window.pageYOffset ? true : false);
-      return () => (window.onscroll = null);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (searchInputIsOpen) {
-      document.body.style.overflowY = "hidden";
-    } else {
-      document.body.style.overflowY = "auto";
-    }
-  }, [searchInputIsOpen]);
 
   //     * HANDLERS
-  const handleCloseSearchSection = () => setSearchInputIsOpen(false);
 
   //     * EVENT-LISTENERS
 
