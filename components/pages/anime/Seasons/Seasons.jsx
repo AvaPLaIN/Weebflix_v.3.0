@@ -1,5 +1,6 @@
 // !--- IMPORTS ---!
 //     * NEXT-JS MODULES
+import Link from "next/link";
 
 //     * REACT-JS MODULES
 
@@ -43,24 +44,28 @@ const Seasons = ({ animes }) => {
   return (
     <SeasonsContainer>
       {animes.map((anime) => (
-        <div className="group-item" key={anime._id} title={anime.titleEng}>
-          <div className="thumnail-container">
-            <Image
-              src={`/api/imageProxy?url=${encodeURIComponent(anime.thumnail)}`}
-              alt={`${anime.titleEng} thumnail`}
-              priority
-              quality={60}
-              className="hightlight-slider-image"
-            />
-          </div>
-          <div className="info">
-            <p className="title">{anime.titleEng}</p>
-            <p className="type">Type: {anime.type}</p>
-            <p className="episodes-count">Episodes: {anime.episodesCount}</p>
-            <p className="status">Status: {anime.status}</p>
-            <p className="status">Released: {anime.released}</p>
-          </div>
-        </div>
+        <Link href={`/anime/${anime._id}`} key={anime._id}>
+          <a className="group-item" title={anime.titleEng}>
+            <div className="thumnail-container">
+              <Image
+                src={`/api/imageProxy?url=${encodeURIComponent(
+                  anime.thumnail
+                )}`}
+                alt={`${anime.titleEng} thumnail`}
+                priority
+                quality={60}
+                className="hightlight-slider-image"
+              />
+            </div>
+            <div className="info">
+              <p className="title">{anime.titleEng}</p>
+              <p className="type">Type: {anime.type}</p>
+              <p className="episodes-count">Episodes: {anime.episodesCount}</p>
+              <p className="status">Status: {anime.status}</p>
+              <p className="status">Released: {anime.released}</p>
+            </div>
+          </a>
+        </Link>
       ))}
     </SeasonsContainer>
   );

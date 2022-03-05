@@ -10,6 +10,7 @@ import { LayoutContainer } from "../../styles/Anime.styles";
 import Header from "../../components/layout/Header";
 import AnimeHeader from "../../components/pages/anime/Header/";
 import Seasons from "../../components/pages/anime/Seasons/";
+import Episodes from "../../components/pages/anime/Episodes/";
 
 //     * STATES
 
@@ -65,6 +66,7 @@ const AnimeId = ({ anime, groupAnimes }) => {
       />
       <LayoutContainer>
         <Seasons animes={groupAnimes} />
+        <Episodes episodes={anime.episodes} />
       </LayoutContainer>
     </div>
   );
