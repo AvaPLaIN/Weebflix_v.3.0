@@ -2,7 +2,7 @@
 //     * NEXT-JS MODULES
 
 //     * REACT-JS MODULES
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 //     * STYLE-COMPONENTS
 import { EpisodesContainer } from "./Episodes.styles";
@@ -34,9 +34,6 @@ const Episodes = ({ episodes }) => {
   const [limitedEpisodes, setLimitedEpisodes] = useState(episodes.slice(0, 20));
 
   //     * HOOKS
-  useEffect(() => {
-    console.log("episodes rerender");
-  }, []);
 
   //     * DATA-FETCHING
 
