@@ -2,6 +2,7 @@
 //     * NEXT-JS MODULES
 
 //     * REACT-JS MODULES
+import { useEffect } from "react";
 
 //     * STYLE-COMPONENTS
 import { HeaderContainer } from "./Header.styles";
@@ -43,6 +44,9 @@ const Header = ({
   //     * STATES
 
   //     * HOOKS
+  useEffect(() => {
+    console.log("header rerender");
+  }, []);
 
   //     * DATA-FETCHING
 

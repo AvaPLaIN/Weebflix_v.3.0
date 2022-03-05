@@ -66,6 +66,9 @@ const AnimeId = ({ anime, groupAnimes }) => {
       />
       <LayoutContainer>
         <Seasons animes={groupAnimes} />
+        {console.log(
+          `${anime.titleEng} has ${anime.episodes.length}. Episodes`
+        )}
         <Episodes episodes={anime.episodes} />
       </LayoutContainer>
     </div>
@@ -97,6 +100,7 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
+      key: params.id,
       anime: JSON.stringify(anime),
       groupAnimes: JSON.stringify(groupAnimes),
     },
