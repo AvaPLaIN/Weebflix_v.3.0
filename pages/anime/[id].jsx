@@ -4,10 +4,12 @@
 //     * REACT-JS MODULES
 
 //     * STYLE-COMPONENTS
+import { LayoutContainer } from "../../styles/Anime.styles";
 
 //     * COMPONENTS
 import Header from "../../components/layout/Header";
 import AnimeHeader from "../../components/pages/anime/Header/";
+import Seasons from "../../components/pages/anime/Seasons/";
 
 //     * STATES
 
@@ -61,9 +63,9 @@ const AnimeId = ({ anime, groupAnimes }) => {
         episodesCount={anime.episodesCount}
         status={anime.status}
       />
-      {/* {groupAnimes?.map((anime) => (
-        <h1 key={anime?._id}>{anime.titleEng}</h1>
-      ))} */}
+      <LayoutContainer>
+        <Seasons animes={groupAnimes} />
+      </LayoutContainer>
     </div>
   );
 };
