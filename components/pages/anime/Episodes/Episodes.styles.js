@@ -4,10 +4,12 @@ export const EpisodesContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 1rem;
   overflow: hidden;
+  height: max-content;
 
   #episodes-scroll-container {
     width: 100%;
-    height: 300px;
+    height: max-content;
+    max-height: 30rem;
     overflow-y: scroll;
 
     .episode {
