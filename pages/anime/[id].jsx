@@ -1,5 +1,6 @@
 // !--- IMPORTS ---!
 //     * NEXT-JS MODULES
+import { useRouter } from "next/router";
 
 //     * REACT-JS MODULES
 
@@ -35,6 +36,12 @@ import Anime from "../../models/Anime";
 //! --- COMPONENT ---
 const AnimeId = ({ anime, groupAnimes }) => {
   //     * INIT
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return "404";
+  }
+
   anime = JSON.parse(anime);
   groupAnimes = JSON.parse(groupAnimes);
 
@@ -94,21 +101,18 @@ export async function getStaticPaths() {
 
 //! --- GET_SERVER_SIDE_PROPS ---
 export async function getStaticProps({ params }) {
-  try {
-    data = await getData(params.slug);
-    await dbConnect();
-    const anime = await Anime.findOne({ _id: params.id });
-    const groupAnimes = await Anime.find({ groupName: anime.groupName });
+  await dbConnect();
+  const anime = await Anime.findOne({ _id: params.id });
+  const groupAnimes = await Anime.find({ groupName: anime.groupName });
 
-    return {
-      props: {
-        key: params.id,
-        anime: JSON.stringify(anime),
-        groupAnimes: JSON.stringify(groupAnimes),
-      },
-      revalidate: 86400,
-    };
-  } catch (err) {}
+  return {
+    props: {
+      key: params.id,
+      anime: JSON.stringify(anime),
+      groupAnimes: JSON.stringify(groupAnimes),
+    },
+    revalidate: 86400,
+  };
 }
 
 export default AnimeId;
