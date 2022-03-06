@@ -55,11 +55,7 @@ const Episodes = ({ episodes }) => {
           scrollableTarget="episodes-scroll-container"
         >
           {limitedEpisodes?.map((episode, index) => (
-            <div
-              onClick={() => handleSkipEpisode(index)}
-              className="episode"
-              key={index}
-            >
+            <div className="episode" key={index}>
               <p>Episode {index + 1}</p>
             </div>
           ))}

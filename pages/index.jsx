@@ -93,6 +93,7 @@ export async function getStaticProps() {
       shounenAnimes: shounen.animes,
       movieAnimes: movie.animes,
     },
+    revalidate: 120,
   };
 }
 

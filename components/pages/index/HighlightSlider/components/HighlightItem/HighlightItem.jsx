@@ -1,8 +1,9 @@
 // !--- IMPORTS ---!
 //     * NEXT-JS MODULES
+import Link from "next/link";
 
 //     * REACT-JS MODULES
-import React, { useEffect, memo } from "react";
+import React, { memo } from "react";
 
 //     * STYLE-COMPONENTS
 import { HighlightItemContainer } from "./HighlightItem.styles";
@@ -64,8 +65,16 @@ const HighlightItem = memo(({ anime }) => {
         </h1>
         <p className="description">{anime?.description}</p>
         <div className="control-buttons">
-          <button>Play</button>
-          <button>Read More</button>
+          <button>
+            <Link href={{ pathname: `/anime/${anime._id}` }}>
+              <a className="link">Play</a>
+            </Link>
+          </button>
+          <button>
+            <Link href={{ pathname: `/anime/${anime._id}` }}>
+              <a className="link">Read More</a>
+            </Link>
+          </button>
         </div>
       </div>
     </HighlightItemContainer>
