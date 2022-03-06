@@ -5,12 +5,33 @@ export const EpisodesContainer = styled.div`
   border-radius: 1rem;
   overflow: hidden;
   height: max-content;
+  min-width: max-content;
+
+  @media (max-width: 1000px) {
+    min-width: 219px;
+    max-width: 219px;
+    height: 20rem;
+  }
+
+  @media (max-width: 600px) {
+    min-width: 204px;
+    max-width: 204px;
+    height: 15rem;
+  }
 
   #episodes-scroll-container {
     width: 100%;
     height: max-content;
     max-height: 30rem;
     overflow-y: scroll;
+
+    @media (max-width: 1000px) {
+      height: 20rem;
+    }
+
+    @media (max-width: 600px) {
+      height: 15rem;
+    }
 
     .episode {
       width: 100%;

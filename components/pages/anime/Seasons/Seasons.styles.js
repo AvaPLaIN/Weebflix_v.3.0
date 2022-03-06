@@ -1,13 +1,24 @@
 import styled from "styled-components";
 
 export const SeasonsContainer = styled.div`
-  width: 250px;
+  min-width: 242px;
+  max-width: 242px;
   height: max-content;
   display: flex;
   flex-direction: column;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 1rem;
   overflow: hidden;
+
+  @media (max-width: 1000px) {
+    min-width: 219px;
+    max-width: 219px;
+  }
+
+  @media (max-width: 600px) {
+    min-width: 204px;
+    max-width: 204px;
+  }
 
   .group-item {
     width: 100%;

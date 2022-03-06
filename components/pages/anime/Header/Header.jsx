@@ -77,13 +77,15 @@ const Header = ({
         <div className="info-container">
           <h1 className="title">
             <span className="title-group">{groupName}</span>
-            {titleEng?.replace(groupName, "")}
+            <span className="title-detail">
+              {titleEng?.replace(groupName, "")}
+            </span>
           </h1>
-          <p className="genres">
+          <div className="genres">
             {genres?.map((genre, index) => (
               <span key={index}>{genre}</span>
             ))}
-          </p>
+          </div>
           <div className="info">
             <div className="titleJap">{titleJap}</div>
             <div className="released">Released: {released}</div>

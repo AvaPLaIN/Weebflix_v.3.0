@@ -65,11 +65,11 @@ const AnimeId = ({ anime, groupAnimes }) => {
         status={anime.status}
       />
       <LayoutContainer>
-        <Seasons animes={groupAnimes} />
-        {console.log(
-          `${anime.titleEng} has ${anime.episodes.length}. Episodes`
-        )}
-        <Episodes episodes={anime.episodes} />
+        <div className="controls">
+          <Seasons animes={groupAnimes} />
+          <Episodes episodes={anime.episodes} />
+        </div>
+        Player
       </LayoutContainer>
     </div>
   );
