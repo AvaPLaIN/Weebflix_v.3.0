@@ -94,18 +94,21 @@ export async function getStaticPaths() {
 
 //! --- GET_SERVER_SIDE_PROPS ---
 export async function getStaticProps({ params }) {
-  await dbConnect();
-  const anime = await Anime.findOne({ _id: params.id });
-  const groupAnimes = await Anime.find({ groupName: anime.groupName });
+  try {
+    data = await getData(params.slug);
+    await dbConnect();
+    const anime = await Anime.findOne({ _id: params.id });
+    const groupAnimes = await Anime.find({ groupName: anime.groupName });
 
-  return {
-    props: {
-      key: params.id,
-      anime: JSON.stringify(anime),
-      groupAnimes: JSON.stringify(groupAnimes),
-    },
-    revalidate: 86400,
-  };
+    return {
+      props: {
+        key: params.id,
+        anime: JSON.stringify(anime),
+        groupAnimes: JSON.stringify(groupAnimes),
+      },
+      revalidate: 86400,
+    };
+  } catch (err) {}
 }
 
 export default AnimeId;
