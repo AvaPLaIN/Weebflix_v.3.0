@@ -76,7 +76,7 @@ const AnimeId = ({ anime, groupAnimes }) => {
           <Seasons animes={groupAnimes} />
           <Episodes episodes={anime.episodes} />
         </div>
-        <video controls />
+        <video controls height="350px" width="600px" />
       </LayoutContainer>
     </div>
   );
